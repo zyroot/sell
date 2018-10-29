@@ -1,5 +1,6 @@
 package com.eim.service;
 
+import com.eim.dto.CarDto;
 import com.eim.pojo.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,11 @@ public interface ProductInfoService {
     ProductInfo save(ProductInfo productInfo);
 
     //减库存
+    void decreaseStock(List<CarDto> carDtoList);
+
     //加库存
+    void increaseStock(List<CarDto> carDtoList);
+
+
 
 }
