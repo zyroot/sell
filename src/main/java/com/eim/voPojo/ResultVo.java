@@ -7,7 +7,7 @@ import lombok.Data;
  * Created by Zy on 2018/10/26.
  */
 @Data
-public class ResultVo {
+public class ResultVo<T> {
 
     /** 错误码 */
     private Integer code;

@@ -3,7 +3,7 @@ package com.eim.controller;
 import com.eim.pojo.ProductCategory;
 import com.eim.pojo.ProductInfo;
 import com.eim.service.ProductCategoryService;
-import com.eim.service.impl.ProductInfoServiceImpl;
+import com.eim.service.ProductInfoService;
 import com.eim.utils.ResultVoUtil;
 import com.eim.voPojo.ProductInfoVo;
 import com.eim.voPojo.ProductVo;
@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Zy on 2018/10/26.
@@ -28,14 +25,14 @@ import java.util.stream.Collectors;
 public class BuyerProductController {
 
     @Autowired//商品
-    private ProductInfoServiceImpl productInfoService;
+    private ProductInfoService productInfoService;
 
     @Autowired//类目
     private ProductCategoryService productCategoryService;
 
     @GetMapping("/list")
     public ResultVo list(){
-        //1.查询所有的上家商品
+        //1.查询所有的上架商品
         List<ProductInfo> upAll = productInfoService.findUpAll();
         //2.查询类目 一次性查询
         List<Integer> typeList = new ArrayList<>();
@@ -44,6 +41,7 @@ public class BuyerProductController {
             typeList.add(productInfo.getCategoryType());
         }
         List<ProductCategory> productCategoryList = productCategoryService.findBycategoryTypeIn(typeList);
+
         //经典方法（lambda语法8.0）
 //        List<Integer> listin = upAll.stream().map(e -> e.getCategoryType()).collect(Collectors.toList());
 //        List<ProductCategory> productCategoryList = productCategoryService.findBycategoryTypeIn(listin);
